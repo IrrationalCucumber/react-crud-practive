@@ -8,19 +8,32 @@ export default function SignIn() {
     username: "",
     password: "",
   });
-  const [token, setToken] = useState("");
+  // const [token, setToken] = useState("");
   const API = process.env.REACT_APP_API;
 
   const handleSubmit = async (e) => {
-    e.prevetDefault();
-    const res = await axios.post(`${API}signin`, user);
-    setToken(res.data);
+    try {
+      e.preventDefault();
+      if (!user.username || !user.password) {
+        alert("Invalid");
+      } else {
+        const res = await axios.post(`${API}signin`, user);
+        console.log(res.data.token);
+        // localStorage.setItem("token", res.data.token);
+      }
+    } catch (err) {
+      if (err.status === 401) {
+        alert("No uses exist");
+      } else {
+        console.log(err);
+      }
+    }
   };
   return (
     <>
       <div className="App">
         <h1>LOGIN</h1>
-        <h2>{token}</h2>
+        {/* <h2>{token}</h2> */}
         <form
           onSubmit={(e) => {
             handleSubmit(e);
