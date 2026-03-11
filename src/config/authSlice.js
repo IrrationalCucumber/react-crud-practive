@@ -4,7 +4,7 @@ import { createSlice } from "@reduxjs/toolkit"; //helps us create reducers and a
 // token is loaded from localStorage so user stays logged in after refresh
 const initialState = {
   token: localStorage.getItem("token") || null,
-  user: null,
+  userName: null,
   type: null,
 };
 
@@ -18,7 +18,7 @@ const authSlice = createSlice({
     // This function runs when login succeeds
     loginSuccess: (state, action) => {
       state.token = action.payload.token; // Save JWT token in Redux state
-      state.user = action.payload.user; // Save user info
+      state.userName = action.payload.userName; // Save user info
       state.type = action.payload.type; // save user type
 
       // Save token in browser storage
@@ -29,7 +29,7 @@ const authSlice = createSlice({
     // Logout action
     logout: (state) => {
       state.token = null; // Clear token from Redux
-      state.user = null; // Remove user info
+      state.userName = null; // Remove user info
       state.type = null;
 
       // Remove token from browser storage

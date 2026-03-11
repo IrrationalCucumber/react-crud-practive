@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux"; // Provider makes Redux store available to all components
-import { store } from "./store"; // Import the store we created
+import { store } from "./config/store"; // Import the store we created
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
