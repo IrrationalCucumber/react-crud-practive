@@ -8,11 +8,20 @@ import { useNavigate } from "react-router-dom";
 export default function Home() {
   const [data, setData] = useState([]); //store data from back
   const navigate = useNavigate();
+  // Get tken in state.auth
+  // const token = useSelector((state) => state.auth.token);
 
   useEffect(() => {
     //fetch data
     const fetchData = async () => {
       try {
+        //  const res = await axios.get("http://localhost:8800/dashboard", {
+        //         headers: {
+        //           // WHY: backend expects token inside Authorization header
+        //           // Format required by most JWT middleware
+        //           Authorization: `Bearer ${token}`,
+        //         },
+        //       });
         const res = await api.get("/home");
         setData(res.data);
       } catch (err) {
