@@ -2,6 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import "./App.css";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux"; //trigger Redux actions
+import { loginSuccess } from "./authSlice"; // Import login action
 
 export default function SignIn() {
   const [user, setUser] = useState({
@@ -18,8 +20,15 @@ export default function SignIn() {
         alert("Invalid");
       } else {
         const res = await axios.post(`${API}signin`, user);
-        console.log(res.data.token);
-        // localStorage.setItem("token", res.data.token);
+        console.log(res.data);
+        //localStorage.setItem("token", res.data.token);
+        dispatch(
+          loginSuccess({
+            token: res.data.token,
+            user: res.data.token,
+            type: res.data.type,
+          }),
+        );
       }
     } catch (err) {
       if (err.status === 401) {
